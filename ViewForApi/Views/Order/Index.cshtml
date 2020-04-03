@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ViewForApi.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderLine)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            @foreach (var orderli in item.OrderLine)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => orderli.Quantity)
+                </td>
+
+                @foreach (var prod in orderli.Product)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => prod.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => prod.Price)
+                    </td>
+
+                }
+
+            }
+            @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+        </tr>
+        }
+    </tbody>
+</table>

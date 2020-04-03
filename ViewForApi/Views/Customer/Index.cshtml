@@ -1,0 +1,58 @@
+﻿@model IEnumerable<ViewForApi.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <h1>Customer Information</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addresses)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+                <td>
+                    @*----------------------------------------------------------------*@
+                    @foreach (var address in item.Addresses)
+                    {
+                        <p><b>Street:   </b> @Html.DisplayFor(modelItem => address.Street)</p>
+                        <p><b>City/Town:    </b> @Html.DisplayFor(modelItem => address.CityTown)</p>
+                        <p><b>County:   </b> @Html.DisplayFor(modelItem => address.County)</p>
+                        <p><b>PostalCode:   </b> @Html.DisplayFor(modelItem => address.PostalCode)</p>
+                        <p><b>Country:  </b> @Html.DisplayFor(modelItem => address.Country)</p>
+                    }
+                    @*<td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>*@
+</tr>
+            }
+    </tbody>
+</table>
