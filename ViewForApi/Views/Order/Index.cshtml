@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
+
 <h1>Index</h1>
 
 
@@ -11,51 +12,58 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerID)
+                @Html.DisplayNameFor(model => model.Customers.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
+                @Html.DisplayNameFor(model => model.Customers.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderLine)
+                Order Created
             </th>
-
+            <th>
+                Order Total
+            </th>
+            <th>
+                Item
+            </th>
+            <th>
+                Sub-Total
+            </th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            @foreach (var orderli in item.OrderLine)
-            {
+            <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => orderli.Quantity)
+                    @Html.DisplayFor(model => item.Customers.FirstName)
                 </td>
+                <td>
+                    @Html.DisplayFor(model => item.Customers.LastName)
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.CreatedDate)</p>
+                </td>
+                <td>
+                    @foreach (var lines in item.OrderLines)
+                    {
 
-                @foreach (var prod in orderli.Product)
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => prod.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => prod.Price)
-                    </td>
 
-                }
-
-            }
-            @*<td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>*@
-        </tr>
+                    }
+                </td>
+                <td>
+                    @foreach (var lines in item.OrderLines)
+                    {
+                        <p>@Html.DisplayFor(modelItem => lines.Product.Name)</p>
+                    }
+                </td>
+                <td>
+                    @foreach (var lines in item.OrderLines)
+                    {
+                        <p>£@Html.DisplayFor(modelItem => lines.Product.Price)</p>
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>

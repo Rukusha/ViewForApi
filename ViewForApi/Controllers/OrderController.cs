@@ -11,7 +11,6 @@ namespace ViewForApi.Controllers
 {
     public class OrderController : Controller
     {
-        //Hosted web API REST Service base url  
         string Baseurl = "https://localhost:44396";
         public async Task<ActionResult> Index()
         {
@@ -28,7 +27,7 @@ namespace ViewForApi.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //Sending request to find web api REST service resource GetAllCustomers using HttpClient  
-                HttpResponseMessage Response = await client.GetAsync("api/Orders");
+                HttpResponseMessage Response = await client.GetAsync("api/OrdersReport");
 
                 //Checking the response is successful or not which is sent using HttpClient  
                 if (Response.IsSuccessStatusCode)
@@ -36,11 +35,10 @@ namespace ViewForApi.Controllers
                     //Storing the response details recieved from web api   
                     var OrderResponse = Response.Content.ReadAsStringAsync().Result;
 
-                    //Deserializing the response recieved from web api and storing into the Customer list  
+                    //Deserializing the response recieved from web api and storing into the OrderInfo list  
                     OrderInfo = JsonConvert.DeserializeObject<List<Order>>(OrderResponse);
-
                 }
-                //returning the customer list to view  
+                //returning the OrderInfo list to view  
                 return View(OrderInfo);
             }
         }
