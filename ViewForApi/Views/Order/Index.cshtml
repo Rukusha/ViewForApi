@@ -1,21 +1,21 @@
-﻿@model IEnumerable<ViewForApi.Models.Order>
+﻿@model IEnumerable<ViewForApi.Models.OrderTotal>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 
-<h1>Index</h1>
+<h1>Customer Orders</h1>
 
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customers.FirstName)
+                First Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customers.LastName)
+                Last Name
             </th>
             <th>
                 Order Created
@@ -34,36 +34,32 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => item.Customers.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Customers.LastName)
-                </td>
-                <td>
-                    <p>@Html.DisplayFor(modelItem => item.CreatedDate)</p>
-                </td>
-                <td>
-                    @foreach (var lines in item.OrderLines)
-                    {
-
-
-                    }
-                </td>
-                <td>
-                    @foreach (var lines in item.OrderLines)
-                    {
-                        <p>@Html.DisplayFor(modelItem => lines.Product.Name)</p>
-                    }
-                </td>
-                <td>
-                    @foreach (var lines in item.OrderLines)
-                    {
-                        <p>£@Html.DisplayFor(modelItem => lines.Product.Price)</p>
-                    }
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.LastName)
+            </td>
+            <td>
+                <p>@Html.DisplayFor(modelItem => item.CreatedDate)</p>
+            </td>
+            <td>
+                <p><b>£@Html.DisplayFor(modelItem => item.Price)</b></p>
+            </td>
+            <td>
+                @foreach (var lines in item.OrderLines)
+                {
+                    <p>@Html.DisplayFor(modelItem => lines.Product.Name)</p>
+                }
+            </td>
+            <td>
+                @foreach (var lines in item.OrderLines)
+                {
+                <p><b>£@Html.DisplayFor(modelItem => lines.Product.Price)</b></p>
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>

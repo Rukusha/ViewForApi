@@ -15,7 +15,7 @@ namespace ViewForApi.Controllers
         public async Task<ActionResult> Index()
         {
 
-            List<Order> OrderInfo = new List<Order>();
+            List<OrderTotal> OrderInfo = new List<OrderTotal>();
 
             using (var client = new HttpClient())
             {
@@ -36,7 +36,7 @@ namespace ViewForApi.Controllers
                     var OrderResponse = Response.Content.ReadAsStringAsync().Result;
 
                     //Deserializing the response recieved from web api and storing into the OrderInfo list  
-                    OrderInfo = JsonConvert.DeserializeObject<List<Order>>(OrderResponse);
+                    OrderInfo = JsonConvert.DeserializeObject<List<OrderTotal>>(OrderResponse);
                 }
                 //returning the OrderInfo list to view  
                 return View(OrderInfo);
