@@ -54,9 +54,9 @@
                 }
             </td>
             <td>
-                @foreach (var lines in item.OrderLines)
+                @foreach (var lines in item.SubTotal)
                 {
-                <p><b>£@Html.DisplayFor(modelItem => lines.Product.Price)</b></p>
+                    <p><b>£@Html.DisplayFor(modelItem => lines.Value)</b></p>
                 }
             </td>
         </tr>
